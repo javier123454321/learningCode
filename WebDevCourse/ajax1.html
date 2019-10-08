@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>AJAX-1 test</title>
+  </head>
+  <body>
+    <button type="button" id="getText" name="getText"><strong>Get Text File</strong></button>
+    <p id = "response"></p>
+  </body>
+
+  <style media="screen" type="text/css">
+    html{
+      background-color:powderblue;
+      font-family: Nunito;
+    }
+    button{
+      padding:8px;
+      font-family: Nunito;
+      font-size:20px;
+    }
+    body{
+      text-align:center;
+      margin:auto;
+      margin-top: 20vh;
+    }
+  </style>
+  <script type="text/javascript">
+
+    document.getElementById("getText").addEventListener('click', function(){
+      loadText();
+    });
+
+    function loadText(){
+      let xhr = new XMLHttpRequest();
+      // console.log('READYSTATE = ' + xhr.readyState);
+      //Use the open function that takes type/url/async(BOOL)
+      xhr.open('GET', "text.txt", true);
+      // console.log('OPEN READYSTATE = ' + xhr.readyState + "\n");
+
+      xhr.onload = function(){ //New Way of doing things does not fire until readystatechange == 4
+            // console.log('ONLOAD READYSTATE = ' + xhr.readyState + "\n");
+        if(this.status == 200){
+          // console.log(this.responseText);
+          document.getElementById("response").innerHTML = this.responseText;
+        }else if(this.status == 404){
+          console.log("request error");
+          document.getElementById("response").textContent = "Request Error"
+        }
+      };
+
+      xhr.onprogress = function(){
+        console.log('ONPROGRESS READYSTATE = ' + xhr.readyState + "\n")
+        //GOOD FOR LOADING BARS, ETC.
+      }
+
+      xhr.onerror = function(){
+        console.log("request error");
+      }
+
+      // xhr.onreadystatechange = function(){//readystate needs to be verified
+      //   // console.log('ONREADYSTATECHANGE READYSTATE = ' + xhr.readyState) + "\n"; //GOES FROM 1 TO 4
+      //   if(this.readyState== 4 && this.status == 200){
+      //     console.log(this.responseText);
+      //   }
+      // }
+
+      xhr.send();
+
+    };
+
+  </script>
+
+</html>

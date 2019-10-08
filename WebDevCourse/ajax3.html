@@ -3,16 +3,13 @@
   <head>
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito&display=swap" rel="stylesheet">
     <meta charset="utf-8">
-    <title>Ajax 4 - PHP Forms</title>
+    <title>Ajax 3 - external API</title>
   </head>
   <body>
-      <button type="button" id="button1"><strong>Get Name</strong></button>
+      <button type="button" id="button1"><strong>Load GitHub Users</strong></button>
       <br><br><br>
-      <form action="process.php" method="get">
-        <input type="text" name="name" placeholder="Name">
-        <input type="submit" name="submitName" value="Submit Name">
-      </form>
-
+      <h3>Users:</h3>
+      <div id="users"></div>
   </body>
   <style media="screen" type="text/css">
 
@@ -58,17 +55,34 @@
 
   <script type="text/javascript">
 
-    document.getElementById('button1').addEventListener('click', getName);
+    let gitHubUrl = "https://api.github.com/users"
+    document.getElementById('button1').addEventListener('click', loadUsers);
 
-    function getName(){
-      var xhr= new XMLHttpRequest();
-      xhr.open('GET', 'process.php?name=Javier', true);
+    function loadUsers(){
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', gitHubUrl, true);
 
       xhr.onload = function(){
-          console.log(this.responseText);
+        if(this.status == 200){
+          let users = JSON.parse(this.responseText)
+          let output = "";
+
+          for(let i in users){
+            output += "<div class=\"user\">" +
+            "<img src=\"" + users[i].avatar_url + "\" width=\"70\" height=\"70\">" +
+            "<ul>" +
+            "<li> ID: " + users[i].id + "</li>" +
+            "<li> Login: " + users[i].login + "</li>" +
+            "</ul></div>"
+          }
+          document.getElementById("users").innerHTML = output
+        }
       }
+
       xhr.send();
     }
+
+
   </script>
 
 </html>
