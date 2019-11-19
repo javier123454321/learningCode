@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue Crash Course</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+
+  <!-- basic example1 -->
+  <body>
+    <div class="heading">
+      <h1>Vue Crash Course</h1>
+      <h3>Followed along by Javier G.</h3>
+      </div>
+
+      <div class="learnSection head">
+        <iframe src="https://www.youtube.com/embed/4deVCNJq3qc"
+        frameborder="3" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    <div class="learnSection" id="root">
+      <h1>{{ greeting }}</h1>
+      <h2>{{ topic }}</h2>
+
+      <!-- v-model is a directive in VUE -->
+      <h3>{{ updated }}</h3>
+      <div class="hidden" v-show="updated == 'password'">
+        <h2>This was here the whole time!</h2>
+      </div>
+
+      <input v-model="updated">
+
+      <!-- v-if is another directive (for adding logic in the HTML) -->
+      <!-- v-if DOES NOT RENDER elements to the dom on false -->
+      <div v-if="updated == 'password'">
+        <h2>You found the secret code!</h2>
+      </div>
+      <div v-else-if="updated == 'pword'">
+        <h2>This is lazy thinking</h2>
+      </div>
+      <div v-else>
+        <h2>Can you guess the right input to the updateable field?</h2>
+        <p>v-if vs v-show
+        v-if is “real” conditional rendering because it ensures that event listeners
+        and child components inside the conditional block are properly destroyed and
+        re-created during toggles.
+        v-if is also lazy: if the condition is false on initial render, it will not do
+        anything - the conditional block won’t be rendered until the condition becomes true
+        for the first time.
+        In comparison, v-show is much simpler - the element is always rendered regardless
+        of initial condition, with CSS-based toggling.</p>
+      </div>
+    </div>
+  </body>
+  <script>
+
+    let app = new Vue({
+      el: '#root',
+      data:{
+        greeting: "Vue Intro",
+        topic: "Conditional Rendering/dynamic updates/Vue Directives",
+        updated: "Update this message dynamically",
+      }
+    });
+
+
+  </script>
+
+  <style media="screen">
+  body{
+    font-family: sans-serif;
+    background-color: #d8f6d5;
+  }
+  div.heading, .learnSection{
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 900px;
+    width: 80%;
+  }
+  .learnSection{
+    background-image: linear-gradient(to top, #56B86F, RGB(65, 184, 131));
+    padding:45px;
+    border-radius: 35px;
+    box-shadow:  0 4px 15px grey;
+    -webkit-transition: all 2s ease;
+  }
+  .learnSection:hover{
+    box-shadow:  0 7px 18px grey;
+    transform: scale(1.01);
+  }
+  .learnSection > iframe{
+    margin: auto;
+    height: 506.25px;
+    max-height: 56.25vw;
+    width: 100%;
+  }
+  .head{
+    text-align: center;
+  }
+  input{
+    border-radius: 5px;
+    border: none;
+    border-bottom: solid 2px grey;
+    background-color: rgb(255,255,255,.5);
+    padding: 15px;
+    width: 60%;
+
+  }
+
+  }
+  </style>
+</html>
