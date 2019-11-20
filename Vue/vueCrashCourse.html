@@ -15,10 +15,10 @@
       <h3>Followed along by Javier G.</h3>
       </div>
 
-      <div class="learnSection head">
+      <!-- <div class="learnSection head">
         <iframe src="https://www.youtube.com/embed/4deVCNJq3qc"
         frameborder="3" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
+      </div> -->
     <div class="learnSection" id="root">
       <h1>{{ greeting }}</h1>
       <h2>{{ topic }}</h2>
@@ -52,7 +52,17 @@
         of initial condition, with CSS-based toggling.</p>
       </div>
     </div>
+    <div class="learnSection" id="vueForm">
+      <h1>Vue Forms</h1>
+      <h2></h2>
+      <h3>Sign Up</h3>
+      <input v-model="email" placeholder="email" id="emailInput1">
+      <button class="vueSubmit" type="button" name="emailSubmit" onclick="alert('submitted')" v-bind:disabled="isValidEmail">
+      Submit Email</button>
+    </div>
   </body>
+
+
   <script>
 
     let app = new Vue({
@@ -61,8 +71,22 @@
         greeting: "Vue Intro",
         topic: "Conditional Rendering/dynamic updates/Vue Directives",
         updated: "Update this message dynamically",
-      }
+        email: '',
+      },
     });
+
+    function isValidEmail(){
+      console.log((document.getElementById("emailInput1").value.length > 2 ));
+      return(document.getElementById("emailInput1").value.length > 2 )
+    }
+    //
+    // let vueForm = new Vue({
+    //   el: '#vueForm',
+    //   formData: {
+    //     email: '',
+    //   }
+    // })
+
 
 
   </script>
@@ -99,16 +123,17 @@
   .head{
     text-align: center;
   }
-  input{
-    border-radius: 5px;
-    border: none;
-    border-bottom: solid 2px grey;
-    background-color: rgb(255,255,255,.5);
-    padding: 15px;
-    width: 60%;
 
+  input, button.vueSubmit{
+    border-radius: 5px;
+    padding: 15px;
   }
 
+  input{
+  width: 60%;
+  background-color: rgb(255,255,255,.5);
+  border: none;
+  border-bottom: solid 2px grey;
   }
   </style>
 </html>
