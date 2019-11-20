@@ -10,15 +10,18 @@
 
   <!-- basic example1 -->
   <body>
-    <div class="heading">
+    <div class="heading" id="headvid">
       <h1>Vue Crash Course</h1>
       <h3>Followed along by Javier G.</h3>
-      </div>
+    </div>
+      
+    <div class="learnSection head">
+      <a href="https://www.youtube.com/watch?v=4deVCNJq3qc&t=594s">link to tutorial</a> <br><br><br>
+      <button class="vueSubmit">Show Video</button> <br><br>
+      <iframe class="embedded"  v-show="showVid == true" src="https://www.youtube.com/embed/4deVCNJq3qc"
+      frameborder="3" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 
-      <!-- <div class="learnSection head">
-        <iframe src="https://www.youtube.com/embed/4deVCNJq3qc"
-        frameborder="3" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div> -->
     <div class="learnSection" id="root">
       <h1>{{ greeting }}</h1>
       <h2>{{ topic }}</h2>
@@ -64,7 +67,12 @@
 
 
   <script>
-
+    // let top = new Vue({
+    //   el: "#headvid",
+    //   data:{
+    //     showVid: false,
+    //   }
+    // });
     let app = new Vue({
       el: '#root',
       data:{
@@ -112,7 +120,6 @@
   }
   .learnSection:hover{
     box-shadow:  0 7px 18px grey;
-    transform: scale(1.01);
   }
   .learnSection > iframe{
     margin: auto;
