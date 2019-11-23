@@ -58,23 +58,32 @@
     </div>
     <div class="learnSection" id="vueForm">
       <h1>Vue Forms</h1>
-      <h2></h2>
       <h3>Sign Up</h3>
-      <input v-model="email" placeholder="email" id="emailInput1">
-      <button class="vueSubmit invalid" type="button" name="emailSubmit" onclick="alert('submitted')"  v-bind:disabled="this.email.length < 5">
+      <input class='' :class="[isValidEmail(this.email)? 'invalid': 'valid']" v-model="email" placeholder="email" id="emailInput1">
+      <button class="vueSubmit" type="button" name="emailSubmit" onclick="alert('submitted')"  v-bind:disabled="isValidEmail(this.email)">
       Submit Email</button>
+    </div>
+
+    <div class="learnSection" id="vueLists">
+      <h1>Vue Appends</h1>
+      <h3>Lists of items</h3>
+      <h4 v-show="items.length==0">Add an item to the list</h4>
+
+      <ul>
+        <li v-for="item in items">{{ item.name }}</li>
+      </ul>
+
+      <input v-model="itemInput" placeholder="insert items" id="itemInput1" v-on:keyup.enter='addItem(itemInput)'>
+      <button class="vueSubmit" type="button" name="itemSubmit" :disabled="itemInput.length == 0" v-on:keyup.enter='addItem(itemInput)' @click="addItem(itemInput)">
+          Submit Email
+      </button>
+      <button class="vueSubmit" type="button" name="itemSubmit" v-show="this.items.length > 0" @click="items = []">Clear List</button>
     </div>
   </div>
   </body>
 
 
   <script>
-    // let top = new Vue({
-    //   el: "#headvid",
-    //   data:{
-    //     showVid: false,
-    //   }
-    // });
     let app = new Vue({
       el: '#root',
       data:{
@@ -83,27 +92,29 @@
         updated: "",
         email: '',
         showVideo: false,
-        
+        itemInput: '',
+        items: [],
       },
       methods: {
         showVid: function(){
           (this.showVideo? app.showVideo = false : app.showVideo = true)
         },
         isValidEmail: function(email){
-          console.log((email.length > 2 ));
-          return(email.length > 2 )
-        }
+          return(email.length < 5 )
+        },
+        addItem: function(item){  
+          if(item.length != 0 ){
+            this.items.push({name: item});
+            this.itemInput = '';
+            }
+          else{alert("Add something to the list!")}
+         },
+         clearList: function(listName){
+           this.listName = [];
+         },
       },
       
     });
-
-    function isValidEmail(){
-
-    }
-    //
-    // let vueForm = new Vue({
-
-    // })
 
 
 
@@ -177,6 +188,12 @@
     min-height:20px;
     color: white;
     background-color: rgb(0,0,0,.8);
+  }
+  .valid{
+    border: solid 3px green;
+  }
+  .invalid:focus{
+    border: solid 3px red;
   }
   </style>
 </html>
