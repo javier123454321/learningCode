@@ -61,7 +61,7 @@
       <h2></h2>
       <h3>Sign Up</h3>
       <input v-model="email" placeholder="email" id="emailInput1">
-      <button class="vueSubmit" type="button" name="emailSubmit" onclick="alert('submitted')" v-bind:disabled="isValidEmail">
+      <button class="vueSubmit invalid" type="button" name="emailSubmit" onclick="alert('submitted')"  v-bind:disabled="this.email.length < 5">
       Submit Email</button>
     </div>
   </div>
@@ -83,18 +83,22 @@
         updated: "",
         email: '',
         showVideo: false,
+        
       },
       methods: {
         showVid: function(){
           (this.showVideo? app.showVideo = false : app.showVideo = true)
         },
+        isValidEmail: function(email){
+          console.log((email.length > 2 ));
+          return(email.length > 2 )
+        }
       },
       
     });
 
     function isValidEmail(){
-      console.log((document.getElementById("emailInput1").value.length > 2 ));
-      return(document.getElementById("emailInput1").value.length > 2 )
+
     }
     //
     // let vueForm = new Vue({

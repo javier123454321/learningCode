@@ -1,0 +1,97 @@
+<div class="spinningContainer1"><img src="https://res.cloudinary.com/memorycaptures-com/image/upload/w_350/MemoriesCaptured/IMG_5926.jpg"></div>
+<div>
+</div>
+
+<div class="spinningContainer2"><img src="https://res.cloudinary.com/memorycaptures-com/image/upload/w_350/MemoriesCaptured/IMG_5952.jpg"></div>
+
+<div class="spinningContainer3"><img src="https://res.cloudinary.com/memorycaptures-com/image/upload/w_350/MemoriesCaptured/IMG_94658.jpg"></div>
+
+
+
+body {
+  padding: 50px;
+}
+div.spinningContainer1 , div.spinningContainer2{
+  margin: 40px;
+  height: auto;
+  width: 350px;
+   -webkit-animation-fill-mode: forwards;
+  animation-duration: 2000ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+}
+
+div.spinningContainer1{
+  animation-name: spin1;
+}
+div.spinningContainer2{
+  animation-delay: 1s;
+  animation-name: spin2;
+  opacity: 0;
+}
+
+div.spinningContainer3{
+  position: absolute;
+  right:20;
+  animation-delay: 1s;
+  animation-name: spin2;
+
+  opacity: 1;
+}
+
+@keyframes spin1 {
+    0% {
+        transform: rotate(-80deg) scale(1.5);
+    }
+  79%{
+
+        filter: drop-shadow(0);
+  }
+  80% {
+        filter: drop-shadow(10px 10px 4px grey);
+  }
+    100% {
+        transform:rotate(375deg);
+        filter: drop-shadow(3px 1px 4px black);
+    }
+}
+@keyframes spin2 {
+    0% {
+        transform: rotate(-80deg) scale(1.5);
+    }
+  10%{
+    opacity:1;
+  }
+  79%{
+
+        filter: drop-shadow(0);
+  }
+  80% {
+        filter: drop-shadow(10px 10px 4px grey);
+  }
+    100% {
+        opacity:1;
+        transform:rotate(337deg);
+        filter: drop-shadow(3px 1px 4px black);
+    }
+}
+@keyframes spin3 {
+    0% {
+        transform: rotate(-80deg) scale(1.5);
+    }
+  10%{
+    opacity:1;
+  }
+  79%{
+
+        filter: drop-shadow(0);
+  }
+  80% {
+        filter: drop-shadow(10px 10px 4px grey);
+  }
+    100% {
+        opacity:1;
+        transform:rotate(337deg);
+        filter: drop-shadow(3px 1px 4px black);
+    }
+}
